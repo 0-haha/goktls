@@ -475,6 +475,9 @@ func TestTLSUniqueMatches(t *testing.T) {
 	if !bytes.Equal(conn.ConnectionState().TLSUnique, serverTLSUniquesValue) {
 		t.Error("client and server channel bindings differ")
 	}
+	if serverTLSUniquesValue == nil || bytes.Equal(serverTLSUniquesValue, make([]byte, 12)) {
+		t.Error("tls-unique is empty or zero")
+	}
 	conn.Close()
 
 	conn, err = Dial("tcp", ln.Addr().String(), clientConfig)
@@ -494,6 +497,9 @@ func TestTLSUniqueMatches(t *testing.T) {
 
 	if !bytes.Equal(conn.ConnectionState().TLSUnique, serverTLSUniquesValue) {
 		t.Error("client and server channel bindings differ when session resumption is used")
+	}
+	if serverTLSUniquesValue == nil || bytes.Equal(serverTLSUniquesValue, make([]byte, 12)) {
+		t.Error("resumption tls-unique is empty or zero")
 	}
 }
 
