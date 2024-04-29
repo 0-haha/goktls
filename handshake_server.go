@@ -374,7 +374,7 @@ func (hs *serverHandshakeState) pickCipherSuite() error {
 	}
 	c.cipherSuite = hs.suite.id
 
-	if c.config.CipherSuites == nil && rsaKexCiphers[hs.suite.id] {
+	if c.config.CipherSuites == nil && !needFIPS() && rsaKexCiphers[hs.suite.id] {
 		tlsrsakex.IncNonDefault()
 	}
 
