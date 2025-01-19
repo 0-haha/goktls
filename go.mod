@@ -1,4 +1,4 @@
-module github.com/secure-for-ai/goktls
+module github.com/0-haha/goktls-1-20
 
 go 1.20
 

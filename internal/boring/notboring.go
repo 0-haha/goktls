@@ -11,7 +11,7 @@ import (
 	"crypto/cipher"
 	"hash"
 
-	"github.com/secure-for-ai/goktls/internal/boring/sig"
+	"github.com/0-haha/goktls-1-20/internal/boring/sig"
 )
 
 const available = false
