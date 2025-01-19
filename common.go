@@ -18,9 +18,9 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"internal/godebug"
 	"io"
 	"net"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -1028,7 +1028,7 @@ var supportedVersions = []uint16{
 const roleClient = true
 const roleServer = false
 
-var tls10godebug = godebug.New("tls10server")
+var tls10godebug = os.Getenv("tls10server")
 
 func (c *Config) supportedVersions(isClient bool) []uint16 {
 	versions := make([]uint16, 0, len(supportedVersions))
@@ -1037,8 +1037,8 @@ func (c *Config) supportedVersions(isClient bool) []uint16 {
 			continue
 		}
 		if (c == nil || c.MinVersion == 0) && v < VersionTLS12 {
-			if !isClient && tls10godebug.Value() == "1" {
-				tls10godebug.IncNonDefault()
+			if !isClient && tls10godebug == "1" {
+				// tls10godebug.IncNonDefault()
 			} else {
 				continue
 			}

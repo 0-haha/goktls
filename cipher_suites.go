@@ -15,7 +15,7 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"hash"
-	"internal/godebug"
+	"os"
 	"runtime"
 
 	"github.com/0-haha/goktls/internal/boring"
@@ -352,10 +352,10 @@ var rsaKexCiphers = map[uint16]bool{
 	TLS_RSA_WITH_AES_256_GCM_SHA384: true,
 }
 
-var rsaKEXgodebug = godebug.New("tlsrsakex")
+var rsaKEXgodebug = os.Getenv("tlsrsakex")
 
 func init() {
-	rsaKexEnabled := rsaKEXgodebug.Value() == "1"
+	rsaKexEnabled := rsaKEXgodebug == "1"
 	for _, c := range cipherSuitesPreferenceOrder[:len(cipherSuitesPreferenceOrder)-len(disabledCipherSuites)] {
 		if !rsaKexEnabled && rsaKexCiphers[c] {
 			continue
