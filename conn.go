@@ -620,13 +620,14 @@ func (c *Conn) readRecordOrCCS(expectChangeCipherSpec bool) error {
 	c.input.Reset(nil)
 
 	var (
-		typ    recordType
-		data   []byte
-		record []byte
-		hdr    []byte
-		n      int
-		vers   uint16
-		err    error
+		typ          recordType
+		data         []byte
+		record       []byte
+		hdr          []byte
+		n            int
+		vers         uint16
+		expectedVers uint16
+		err          error
 	)
 
 	if _, ok := c.in.cipher.(kTLSCipher); ok {
@@ -670,7 +671,7 @@ func (c *Conn) readRecordOrCCS(expectChangeCipherSpec bool) error {
 	}
 
 	vers = uint16(hdr[1])<<8 | uint16(hdr[2])
-	expectedVers := c.vers
+	expectedVers = c.vers
 	if expectedVers == VersionTLS13 {
 		// All TLS 1.3 records are expected to have 0x0303 (1.2) after
 		// the initial hello (RFC 8446 Section 5.1).
