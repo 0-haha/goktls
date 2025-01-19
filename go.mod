@@ -1,5 +1,6 @@
 module github.com/0-haha/goktls
-go 1.20
+
+go 1.21
 
 require (
 	github.com/rogpeppe/go-internal v1.12.0
