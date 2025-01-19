@@ -1,5 +1,4 @@
-module github.com/0-haha/goktls-1-20
-
+module github.com/0-haha/goktls
 go 1.20
 
 require (
