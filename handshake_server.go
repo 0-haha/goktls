@@ -173,7 +173,7 @@ func (c *Conn) readClientHello(ctx context.Context) (*clientHelloMsg, error) {
 	c.out.version = c.vers
 
 	if c.config.MinVersion == 0 && c.vers < VersionTLS12 {
-		tls10server.IncNonDefault()
+		// tls10server.IncNonDefault()
 	}
 
 	return clientHello, nil
@@ -375,7 +375,7 @@ func (hs *serverHandshakeState) pickCipherSuite() error {
 	c.cipherSuite = hs.suite.id
 
 	if c.config.CipherSuites == nil && !needFIPS() && rsaKexCiphers[hs.suite.id] {
-		tlsrsakex.IncNonDefault()
+		// tlsrsakex.IncNonDefault()
 	}
 
 	for _, id := range hs.clientHello.cipherSuites {

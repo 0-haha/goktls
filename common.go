@@ -1008,7 +1008,7 @@ func (c *Config) time() time.Time {
 	return t()
 }
 
-var tlsrsakex = godebug.New("tlsrsakex")
+var tlsrsakex = os.Getenv("tlsrsakex")
 
 func (c *Config) cipherSuites() []uint16 {
 	if needFIPS() {
@@ -1017,7 +1017,7 @@ func (c *Config) cipherSuites() []uint16 {
 	if c.CipherSuites != nil {
 		return c.CipherSuites
 	}
-	if tlsrsakex.Value() == "1" {
+	if tlsrsakex == "1" {
 		return defaultCipherSuitesWithRSAKex
 	}
 	return defaultCipherSuites

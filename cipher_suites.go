@@ -15,7 +15,6 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"hash"
-	"os"
 	"runtime"
 
 	"github.com/0-haha/goktls/internal/boring"
